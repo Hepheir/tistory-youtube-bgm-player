@@ -80,6 +80,18 @@ function onPlayerReady(evt) {
         player.seekTo(parseInt(lastPlayedSeconds), true);
     }
     evt.target.playVideo();
+    savePlayingState();
+}
+
+function savePlayingState() {
+    // 페이지 이동시에도 이어서 재생 가능하도록 재생정보를 쿠키에 저장
+    var d = new Date();
+    d.setTime( d.getTime() + (60*60*1000) );
+    setInterval(function() {
+        document.cookie="YBPindex=" + player.getPlaylistIndex().toString() + "; expires=" + d.toUTCString() + ";path=/";
+        document.cookie="YBPseconds=" + player.getCurrentTime().toString() + "; expires=" + d.toUTCString() + ";path=/";
+    }, 500);
+    
 }
 
 function onPlayerStateChange(evt) {
@@ -91,18 +103,6 @@ function onPlayerStateChange(evt) {
         Input_isPlaying.checked = false;
     }
 }
-
-function savePlayingState() {
-    // 페이지 이동시에도 이어서 재생 가능하도록 재생정보를 쿠키에 저장
-    var d = new Date();
-    d.setTime( d.getTime() + (60*60*1000) );
-    setInterval(function() {
-        document.cookie="YBPindex=" + player.getPlaylistIndex().toString() + "; expires=" + d.toUTCString() + ";path=/";
-        document.cookie="YBPseconds=" + player.getCurrentTime().toString() + "; expires=" + d.toUTCString() + ";path=/";
-    }, 1000);
-    
-}
-savePlayingState();
 
 
 
