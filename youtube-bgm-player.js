@@ -2,18 +2,42 @@
 
 var PLAYLIST = [
     {
+        id: 'j8EIdwydtUM',
+        title: `2411 (Audio) [Mini Album - wonderlust]`,
+        artist: 'Crush (크러쉬)'
+    },
+    {
         id: '-UZXEFzWXfc',
-        title: ' GOOD BOY + FANTASTIC BABY in MAMA 2014',
+        title: `'GOOD BOY' + 'FANTASTIC BABY' in MAMA 2014`,
         artist: 'GD X TAEYANG'
     },
     {
         id: 'ULjVCI37cOA',
-        title: '17.06.10 ACT III, M.O.T.T.E in SEOUL "‪삐딱하게"',
+        title: `17.06.10 ACT III, M.O.T.T.E in SEOUL "‪삐딱하게"`,
         artist: 'G-DRAGON'
+    },
+    {
+        id: 'bGZZxgixkew',
+        title: `BIGBANG - 'LOSER' + 'BAE BAE' + ‘뱅뱅뱅(BANG BANG BANG)' in 2015 MAMA"`,
+        artist: 'BIGBANG'
+    },
+    {
+        id: 'GBc0xszmpIY',
+        title: `Big Bang-Stupid Liar (0421 Mcountdown)`,
+        artist: 'BIGBANG'
     }
+    
 ];
-
 /**
+ * 양식
+,
+    {
+        id: '',
+        title: ``,
+        artist: ''
+    }
+ * 
+ * 
  * id: 재생하고 싶은 유튜브 영상 고유 식별자
  * title: 제목
  * artist: 아티스트
@@ -182,7 +206,11 @@ Input_isPlaying.addEventListener('click', function() {
 });
 
 document.getElementById('js-ybp--prev').addEventListener('click', function() {
-    loadVideoByIndex(PLAYING_INDEX.add(-1));
+    if (player.getCurrentTime() > 5) {
+        player.seekTo(0, true);
+    } else {
+        loadVideoByIndex(PLAYING_INDEX.add(-1));
+    }
 });
 
 document.getElementById('js-ybp--next').addEventListener('click', function() {
